@@ -1,0 +1,82 @@
+<!-- views/add-user.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    form {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #3e8e41;
+    }
+</style>
+</head>
+
+<body>
+  <h1>Add User</h1>
+  <form action="/add-user" method="POST">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password">
+    </div>
+    <div>
+      <label for="sessionLinks">Session Links:</label>
+      <input type="text" name="sessionLink" id="sessionLink">
+    </div>
+    <div>
+      <label for="materials">Materials:</label>
+      <input type="text" name="materialLinks" id="materialLinks">
+    </div>
+    <button type="submit">Add User</button>
+  </form>
+
+</body>
+</html>
