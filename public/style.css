@@ -197,11 +197,11 @@ section .title::after {
     height: 100vh;
     background-attachment: fixed;
     background-color: #A11213;
-    color: #ffffff;
+    color: #000000;
     min-height: 500px;
     font-family: 'Ubuntu', sans-serif;
-    /* opacity: 0.5; */
 }
+
 
 .home .max-width {
     width: 100%;
@@ -228,7 +228,7 @@ section .title::after {
 }
 
 .home .home-content .text-3 span {
-    color: rgb(255, 255, 255);
+    color: #000000;
     font-weight: 500;
 }
 
@@ -246,8 +246,8 @@ section .title::after {
 }
 
 .home .home-content a:hover {
-    color: crimson;
-    background: none;
+    color: black;
+    background-color: gold;
 }
 
 /* about section styling */
@@ -759,6 +759,9 @@ footer span a:hover {
 @media (max-width: 690px) {
     .max-width {
         padding: 0 23px;
+    }
+    .imagee{
+        display: none;
     }
 
     .home .home-content .text-2 {

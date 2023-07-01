@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     // typing text animation script
     var typed = new Typed(".typing", {
-        strings: ["Unlock your potential with our immersive English online course", "Enhance your communication skills and connect with the world through English", "Start your journey towards bilingualism with our comprehensive English course"],
+        strings: ["Unlock your potential with our immersive English online course", "Enhance your communication skills and connect with the world through English", "Start your journey towards bilingualism with Ican Academy English course"],
         typeSpeed: 110,
         backSpeed: 30,
         loop: true
