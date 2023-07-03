@@ -10,13 +10,11 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     /* Body styles */
     body {
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
     }
-
     /* Navbar styles */
     .navbar {
       position: fixed;
@@ -26,32 +24,27 @@
       height: 80px;
       background-color: #A11213;
     }
-
     .navbar .logo {
       float: left;
       margin-top: 20px;
       margin-left: 30px;
       font-weight: 400;
     }
-
     .navbar .logo a {
       color: #fff;
       font-size: 40px;
       font-weight: bold;
       text-decoration: none;
     }
-
     .navbar .menu {
       float: right;
       list-style: none;
       margin: 0;
       padding: 0;
     }
-
     .navbar .menu li {
       display: inline-block;
     }
-
     .navbar .menu li a {
       display: block;
       color: #fff;
@@ -60,11 +53,9 @@
       padding: 20px;
       text-decoration: none;
     }
-
     .navbar .menu li a:hover {
       background-color: #555;
     }
-
     section {
       margin-top: 150px;
       box-shadow: 5px 5px 25px rgb(179, 172, 172);
@@ -77,9 +68,7 @@
       padding: 45px 0;
       transition: all 2s;
       padding-bottom: 300px;
-
     }
-
     .box {
       width: 200px;
       height: 200px;
@@ -90,19 +79,16 @@
       border-radius: 20px;
       position: relative;
     }
-
     .box:hover {
       width: 230px;
       height: 230px;
       background-color: gold;
     }
-
     .container {
       display: flex;
       justify-content: center;
       margin: 30px;
     }
-
     .text {
       position: absolute;
       top: 50%;
@@ -110,7 +96,6 @@
       transform: translate(-50%, -50%);
       text-align: center;
     }
-
     /* footer section styling */
     footer {
       background: #111;
@@ -119,7 +104,6 @@
       text-align: center;
       margin-top: 55px;
     }
-
     .span {
       color: gold;
     }
@@ -128,11 +112,9 @@
       color: crimson;
       text-decoration: none;
     }
-
     footer span a:hover {
       text-decoration: underline;
     }
-
     /* Media queries for phones */
     @media (max-width: 600px) {
       .navbar .logo a {
@@ -192,7 +174,6 @@
       </div>
     </div>
   </nav>
-
   <section>
     <h1 style="text-align: center;">Welcome,<span style="color: #DD2C00;">
         <%= userName %>!
@@ -209,14 +190,9 @@
       style="margin: 30px; border-radius: 20px; background-color: #A11213;border-radius: 20px; text-decoration: none; font-size: 30px; color: #ffffff;padding: 10px;"
       href="/logout">Logout</a>
   </section>
-
   <!-- footer section start -->
   <footer class="span">
     <span>Created By Ahmed Essam | <span class="far fa-copyright"></span> 2023 All rights reserved.</span>
   </footer>
-
-
-
 </body>
-
 </html>

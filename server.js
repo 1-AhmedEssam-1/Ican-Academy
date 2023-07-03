@@ -12,11 +12,9 @@ const app = express();
 
 // Set the views directory path
 app.set('views', path.join(__dirname, 'views'));
-
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
 // Set up session middleware
 app.use(
   session({
@@ -48,12 +46,33 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+
+// Define admin schema and model
+const adminSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+const Admin = mongoose.model('Admin', adminSchema);
+
 // Middleware function to check if the user is logged in
 const requireLogin = (req, res, next) => {
   if (req.session.userId) {
+    // Check if the user is the admin
+    if (req.session.username === 'admin' && req.session.password === 'admin') {
+      req.session.isAdmin = true;
+    }
     next();
   } else {
     res.redirect('/login');
+  }
+};
+
+const requireAdmin = (req, res, next) => {
+  if (req.session.isAdmin) {
+    next();
+  } else {
+    res.redirect('/admin-login');
   }
 };
 
@@ -62,35 +81,28 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
-// // Signup page - public route
-// app.get('/signup', (req, res) => {
-//   res.render('signup', { error: null });
-// });
+app.get('/admin-login', (req, res) => {
+  res.render('admin-login');
+});
 
-// // Signup form submission - public route
-// app.post('/signup', async (req, res) => {
+app.post('/admin-login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
-//   try {
-//     console.log('ahmed')
-//     const { username, password } = req.body;
+    const admin = await Admin.findOne({ username });
+    if (!admin || password !== admin.password) {
+      return res.render('admin-login', { error: 'Invalid username or password' });
+    }
 
-//     const userExists = await User.findOne({ username });
-//     if (userExists) {
-//       return res.render('signup', { error: 'User already exists' });
-//     }
+    // Set the isAdmin property on the session object
+    req.session.isAdmin = true;
 
-//     const user = new User({
-//       username,
-//       password,
-//     });
-//     await user.save();
-
-//     res.redirect('/login');
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send('Server error');
-//   }
-// });
+    res.redirect('/admin0');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 
 // Login page - public route
 app.get('/login', (req, res) => {
@@ -107,13 +119,6 @@ app.post('/login', async (req, res) => {
       return res.render('login', { error: 'Invalid username or password' });
     }
 
-    // Check if the user is the admin
-    if (username === 'admin' && password === 'admin') {
-      console.log('Admin logged in');
-      return res.redirect('/admin0');
-    }
-
-
     req.session.userId = user._id;
 
     res.redirect('/main');
@@ -122,6 +127,7 @@ app.post('/login', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
 app.get('/main', requireLogin, async (req, res) => {
   try {
     // Retrieve the user's name and sessionLinks from the database
@@ -141,7 +147,7 @@ app.get('/main', requireLogin, async (req, res) => {
     res.status(500).send('Server error');
   }
 });
-app.get('/admin0', async (req, res) => {
+app.get('/admin0', requireAdmin, async (req, res) => {
   console.log('/admin route called');
   const users = await User.find();
   res.render('admin', { users });
@@ -164,7 +170,7 @@ app.post('/edit/:id', async (req, res) => {
   const { id } = req.params;
   const { username, password, sessionLink, materialLinks } = req.body;
   try {
-    await User.findByIdAndUpdate(id, { username, password ,sessionLink ,materialLinks});
+    await User.findByIdAndUpdate(id, { username, password, sessionLink, materialLinks });
     res.redirect('/admin0');
   } catch (err) {
     console.error(err);
@@ -175,6 +181,11 @@ app.post('/edit/:id', async (req, res) => {
 app.get('/delete/:id', async (req, res) => {
   const { id } = req.params;
   try {
+    const user = await User.findById(id);
+    // Check if the user being deleted is the admin
+    if (user.username === 'admin') {
+      return res.redirect('/admin0');
+    }
     await User.findByIdAndDelete(id);
     res.redirect('/admin0');
   } catch (err) {
@@ -196,7 +207,7 @@ app.get('/logout', (req, res) => {
 
 // Add user form submission - protected route
 app.post('/add-user', async (req, res) => {
-  const { username, password ,sessionLink ,materialLinks} = req.body;
+  const { username, password, sessionLink, materialLinks } = req.body;
   try {
     const userExists = await User.findOne({ username });
     if (userExists) {

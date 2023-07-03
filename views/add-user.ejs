@@ -62,19 +62,19 @@
   <form action="/add-user" method="POST">
     <div>
       <label for="username">Username:</label>
-      <input type="text" name="username" id="username">
+      <input type="text" name="username" id="username" required>
     </div>
     <div>
       <label for="password">Password:</label>
-      <input type="password" name="password" id="password">
+      <input type="password" name="password" id="password" required>
     </div>
     <div>
       <label for="sessionLinks">Session Links:</label>
-      <input type="text" name="sessionLink" id="sessionLink">
+      <input type="text" name="sessionLink" id="sessionLink" required>
     </div>
     <div>
       <label for="materials">Materials:</label>
-      <input type="text" name="materialLinks" id="materialLinks">
+      <input type="text" name="materialLinks" id="materialLinks" required>
     </div>
     <button type="submit">Add User</button>
   </form>
