@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Background color and font styles */
+    body {
+      background-color: #f4f6f9;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Navigation bar styles */
+    nav {
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1rem;
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+      background-color: #444;
+      color: #fff;
+      height: 100vh;
+      padding: 2rem;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 1rem;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Main content styles */
+    .main-content {
+      padding: 2rem;
+      margin-left: 15rem;
+    }
+
+    .main-content h1 {
+      margin-top: 0;
+    }
+
+    /* Table styles */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 0.5rem;
+    }
+
+    th {
+      background-color: #333;
+      color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Form styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 style="text-align: center;">Admin panel</h1>
+  <a style="text-decoration: none; color: rgb(255, 0, 0); float: right; margin-right: 20px; margin-bottom: 5px;"
+    href="/logout">Logout</a>
+  <a style="text-decoration: none; color: blue; float: right; margin-right: 20px; margin-bottom: 5px;"
+    href="/add-user">Add User</a>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user=> { %>
+        <tr>
+          <td>
+            <%= user.username %>
+          </td>
+          <td>
+            <%= user.password %>
+          </td>
+          <td><a style="text-decoration: none; color: blue;" href="/edit/<%= user._id %>">Edit</a></td>
+          <td><a style="text-decoration: none; color: red;" href="/delete/<%= user._id %>">Delete</a></td>
+        </tr>
+        <% }) %>
+    </tbody>
+  </table>
+</body>
+
+</html>
